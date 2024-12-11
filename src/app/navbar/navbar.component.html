@@ -1,0 +1,9 @@
+<div class="flex items-center justify-between border-b-black border px-2 py-1">
+  <button
+    (click)="toggleSidebar.emit()"
+    class="p-1 rounded-lg hover:bg-gray-200 transition flex justify-center"
+  >
+    <mat-icon>{{ isSidebarVisible ? "close" : "menu" }}</mat-icon>
+  </button>
+  <h1 class="text-lg font-semibold">Navbar</h1>
+</div>
