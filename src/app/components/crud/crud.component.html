@@ -1,21 +1,47 @@
-<mat-table [dataSource]="dataSource">
+<div class="w-full p-4 flex justify-end">
+  <button
+    class="bg-blue-500 flex justify-center items-center px-2 py-1 rounded-md text-white cursor-pointer hover:bg-blue-600"
+    (click)="createItem()"
+  >
+    Agregar {{ crudName }}
+  </button>
+</div>
+<table
+  mat-table
+  header-headline-font
+  [dataSource]="dataSource"
+  class="font-sans"
+>
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-    <mat-header-cell *matHeaderCellDef>{{
-      getHeaderName(column)
-    }}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
+    <th mat-header-cell *matHeaderCellDef>{{ getHeaderName(column) }}</th>
+    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-icon-button (click)="deleteItem(element)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-cell>
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="flex text-white">
+        <div
+          class="bg-red-400 flex justify-center items-center rounded-l-md p-1 cursor-pointer hover:bg-red-500"
+          (click)="deleteItem(element)"
+        >
+          <mat-icon>delete</mat-icon>
+        </div>
+        <div
+          class="bg-blue-500 flex justify-center items-center rounded-r-md p-1 cursor-pointer hover:bg-blue-600"
+          (click)="editItem(element)"
+        >
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </td>
   </ng-container>
 
-  <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: allColumns"></mat-row>
-</mat-table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  <tr mat-header-row *matHeaderRowDef="allColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: allColumns"></tr>
+</table>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  hidePageSize="true"
+  aria-label="Select page of users"
+></mat-paginator>

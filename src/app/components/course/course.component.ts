@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CrudComponent } from '../crud/crud.component';
-import { PlanService } from '../../core/service/plan.service';
-import { DialogField } from '../crud/dialog/dialog.component';
+import { CourseService } from '../../core/service/course.service';
 import { Validators } from '@angular/forms';
+import { DialogField } from '../crud/dialog/dialog.component';
+import { CrudComponent } from '../crud/crud.component';
 
 @Component({
   selector: 'app-course',
@@ -12,13 +12,84 @@ import { Validators } from '@angular/forms';
   styleUrl: './course.component.css',
 })
 export class CourseComponent {
-  constructor(public planService: PlanService) {}
-
-  cursoFormFields: DialogField[] = [
+  constructor(public courseService: CourseService) {}
+  crudName = 'Curso';
+  displayedColumns = [
+    'title',
+    'description',
+    'price',
+    'teacherName',
+    'durationHours',
+    'totalLessons',
+    'averageRating',
+    'isPublished',
+    'level',
+  ];
+  columnHeaders = {
+    title: 'Titulo',
+    description: 'Descripción',
+    price: 'Precio',
+    teacherName: 'Profesor',
+    durationHours: 'Duración',
+    totalLessons: 'Lecciones',
+    averageRating: 'Rating',
+    isPublished: 'Publicado',
+    level: 'Nivel',
+  };
+  formFields: DialogField[] = [
     {
-      name: 'nombre',
-      label: 'Nombre del Curso',
-      validators: [Validators.required, Validators.minLength(3)],
+      name: 'title',
+      label: 'Titulo',
+      type: 'text',
+      validators: [Validators.required],
+    },
+    {
+      name: 'price',
+      label: 'Precio',
+      type: 'number',
+      validators: [Validators.required],
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      type: 'text',
+      validators: [Validators.required],
+    },
+    {
+      name: 'teacherName',
+      label: 'Profesor',
+      type: 'text',
+      validators: [Validators.required],
+    },
+    {
+      name: 'durationHours',
+      label: 'Duración',
+      type: 'number',
+      validators: [Validators.required],
+    },
+    {
+      name: 'totalLessons',
+      label: 'Lecciones',
+      type: 'number',
+      validators: [Validators.required],
+    },
+    {
+      name: 'averageRating',
+      label: 'Rating',
+      type: 'number',
+      validators: [Validators.required],
+    },
+    {
+      name: 'isPublished',
+      label: 'Publicado',
+      type: 'text',
+      validators: [Validators.required],
+    },
+    {
+      name: 'level',
+      label: 'Nivel',
+      type: 'text',
+      validators: [Validators.required],
     },
   ];
 }

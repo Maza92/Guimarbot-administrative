@@ -5,6 +5,8 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { PlanService } from '../../../core/service/plan.service';
+import { Route, Router } from '@angular/router';
 
 export type MenuItem = {
   icon: string;
@@ -25,19 +27,23 @@ export type MenuItem = {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent {
-  @Input() isVisible = true;
+export class SidebarComponent implements OnInit {
+  @Input() isVisible: boolean = false;
+
+  constructor(public planService: PlanService, private router: Router) {}
+
+  ngOnInit() {}
+
   menuItems = [
-    { label: 'Planes', icon: 'credit_card' },
-    { label: 'E-Commerce', icon: 'shopping_cart' },
-    { label: 'Inbox', icon: 'inbox', badge: 14 },
-    { label: 'Profile', icon: 'person' },
-    { label: 'Settings', icon: 'settings' },
-    { label: 'Log Out', icon: 'logout' },
+    { label: 'Planes', icon: 'credit_card', route: '/plan' },
+    { label: 'Cursos', icon: 'book', route: '/course' },
+    { label: 'Inbox', icon: 'inbox', route: '/inbox' },
+    { label: 'Profile', icon: 'person', route: '/profile' },
+    { label: 'Settings', icon: 'settings', route: '/settings' },
+    { label: 'Log Out', icon: 'logout', route: '/logout' },
   ];
 
   onMenuClick(item: any) {
-    console.log('Menu item clicked:', item);
-    // Manejar la navegación o acciones aquí
+    this.router.navigate([item.route]);
   }
 }

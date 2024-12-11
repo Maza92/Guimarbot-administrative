@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export interface DialogField {
   name: string;
   label: string;
-  type?: 'text' | 'email' | 'number' | 'password';
+  type: 'text' | 'email' | 'number' | 'password';
   validators?: any[];
 }
 
@@ -92,6 +92,13 @@ export class DialogComponent {
         ...this.dialogConfig.item,
         ...this.form.value,
       };
+
+      this.dialogConfig.fields?.forEach((field) => {
+        if (field.type === 'number') {
+          formData[field.name] = +formData[field.name];
+        }
+      });
+      console.log(formData);
       this.dialogRef.close(formData);
     }
   }

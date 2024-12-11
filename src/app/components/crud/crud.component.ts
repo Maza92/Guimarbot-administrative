@@ -1,6 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CrudService } from '../../core/service/crud.service';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import {
+  MatTableModule,
+  MatTableDataSource,
+  MatHeaderCell,
+  MatHeaderCellDef,
+} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,7 +19,14 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-crud',
   standalone: true,
-  imports: [MatTableModule, MatIcon, MatPaginatorModule, CommonModule],
+  imports: [
+    MatTableModule,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatIcon,
+    MatPaginatorModule,
+    CommonModule,
+  ],
   templateUrl: './crud.component.html',
   styleUrl: './crud.component.css',
 })
@@ -23,6 +35,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
   @Input() displayedColumns!: string[];
   @Input() columnHeaders!: { [key: string]: string };
   @Input() formFields!: DialogField[];
+  @Input() crudName!: string;
 
   dataSource!: MatTableDataSource<T>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -63,6 +76,8 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
 
   createItem() {
     const dialogRef = this.dialog.open(DialogComponent, {
+      width: '1000px',
+      height: '400px',
       data: {
         type: 'form',
         title: 'Crear Nuevo Elemento',
@@ -73,6 +88,27 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.service.create(result).subscribe(() => {
+          this.loadData();
+        });
+      }
+    });
+  }
+
+  editItem(item: T) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '1000px',
+      height: '400px',
+      data: {
+        type: 'form',
+        title: 'Editar Elemento',
+        fields: this.formFields,
+        item,
+      } as DialogConfig,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.service.update(item.id, result).subscribe(() => {
           this.loadData();
         });
       }
