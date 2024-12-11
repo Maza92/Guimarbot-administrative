@@ -1,8 +1,8 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './components/ui/sidebar/sidebar.component';
+import { NavbarComponent } from './components/ui/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',

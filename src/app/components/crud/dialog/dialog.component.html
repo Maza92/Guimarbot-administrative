@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ dialogConfig.title }}</h2>
+<mat-dialog-content>
+  <ng-container *ngIf="dialogConfig.type === 'confirm'">
+    <p>{{ dialogConfig.message }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="dialogConfig.type === 'form'">
+    <form [formGroup]="form">
+      <mat-form-field
+        *ngFor="let field of dialogConfig.fields"
+        appearance="outline"
+      >
+        <mat-label>{{ field.label }}</mat-label>
+        <input
+          matInput
+          [type]="field.type || 'text'"
+          [formControlName]="field.name"
+        />
+        <mat-error *ngIf="form.get(field.name)?.invalid">
+          {{ getErrorMessage(field.name) }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="dialogConfig.type === 'form' && form.invalid"
+  >
+    {{ dialogConfig.confirmText || "Aceptar" }}
+  </button>
+</mat-dialog-actions>

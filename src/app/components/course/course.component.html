@@ -1,0 +1,21 @@
+<app-crud
+  [service]="planService"
+  [displayedColumns]="[
+    'id',
+    'name',
+    'price',
+    'maxUsers',
+    'description',
+    'isActive'
+  ]"
+  [columnHeaders]="{
+    id: 'ID',
+    name: 'Nombre',
+    price: 'Precio',
+    maxUsers: 'Capacidad de Usuarios',
+    description: 'Descripción',
+    isActive: 'Activo'
+  }"
+  [formFields]="cursoFormFields"
+>
+</app-crud>
