@@ -1,0 +1,151 @@
+<div class="flex flex-col justify-center font-[sans-serif] sm:h-screen p-4">
+  <div class="max-w-4xl w-full mx-auto border border-gray-300 rounded-2xl p-8">
+    <div
+      class="w-full flex items-center justify-center pb-8 font-medium text-2xl"
+    >
+      <h1>Guimarbot</h1>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">Nombres</label>
+          <input
+            formControlName="names"
+            type="text"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+            placeholder="Ingresa tus nombres"
+          />
+          <div
+            *ngIf="
+              registerForm.get('names')?.invalid &&
+              registerForm.get('names')?.touched
+            "
+            class="text-red-600 text-sm mt-1"
+          >
+            Nombre es obligatorio y debe tener al menos 3 caracteres.
+          </div>
+        </div>
+
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">Apellidos</label>
+          <input
+            formControlName="lastName"
+            type="text"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+            placeholder="Ingresa tus apellidos"
+          />
+          <div
+            *ngIf="
+              registerForm.get('lastName')?.invalid &&
+              registerForm.get('lastName')?.touched
+            "
+            class="text-red-600 text-sm mt-1"
+          >
+            Apellido es obligatorio y debe tener al menos 3 caracteres.
+          </div>
+        </div>
+
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block"
+            >Correo Electrónico</label
+          >
+          <input
+            formControlName="email"
+            type="email"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+            placeholder="Ingresa tu correo"
+          />
+          <div
+            *ngIf="
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+            "
+            class="text-red-600 text-sm mt-1"
+          >
+            Ingresa un correo válido.
+          </div>
+        </div>
+
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block"
+            >Fecha de Nacimiento</label
+          >
+          <input
+            formControlName="birthDate"
+            type="date"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block">Contraseña</label>
+          <input
+            formControlName="password"
+            type="password"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+            placeholder="Ingresa tu contraseña"
+          />
+          <div
+            *ngIf="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            "
+            class="text-red-600 text-sm mt-1"
+          >
+            La contraseña debe tener al menos 6 caracteres.
+          </div>
+        </div>
+
+        <div>
+          <label class="text-gray-800 text-sm mb-2 block"
+            >Confirmar Contraseña</label
+          >
+          <input
+            formControlName="confirmPassword"
+            type="password"
+            class="text-gray-800 bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500"
+            placeholder="Confirma tu contraseña"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center mt-6">
+        <input
+          formControlName="acceptTerms"
+          id="accept-terms"
+          type="checkbox"
+          class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        />
+        <label for="accept-terms" class="text-gray-800 ml-3 block text-sm">
+          Acepto los
+          <a
+            href="javascript:void(0);"
+            class="text-blue-600 font-semibold hover:underline"
+            >Términos y Condiciones</a
+          >
+        </label>
+      </div>
+
+      <div class="mt-8">
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid"
+          class="w-full py-3 px-4 text-sm tracking-wider font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+        >
+          Crear Cuenta
+        </button>
+      </div>
+
+      <p class="text-gray-800 text-sm mt-6 text-center">
+        ¿Ya tienes una cuenta?
+        <a
+          href="javascript:void(0);"
+          class="text-blue-600 font-semibold hover:underline"
+          (click)="goToLogin()"
+          >Inicia sesión aquí</a
+        >
+      </p>
+    </form>
+  </div>
+</div>

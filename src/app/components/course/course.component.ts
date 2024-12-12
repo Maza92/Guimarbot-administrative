@@ -3,6 +3,7 @@ import { CourseService } from '../../core/service/course.service';
 import { Validators } from '@angular/forms';
 import { DialogField } from '../crud/dialog/dialog.component';
 import { CrudComponent } from '../crud/crud.component';
+import { CourseDialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-course',
@@ -12,6 +13,7 @@ import { CrudComponent } from '../crud/crud.component';
   styleUrl: './course.component.css',
 })
 export class CourseComponent {
+  dialogComponent = CourseDialogComponent;
   constructor(public courseService: CourseService) {}
   crudName = 'Curso';
   displayedColumns = [

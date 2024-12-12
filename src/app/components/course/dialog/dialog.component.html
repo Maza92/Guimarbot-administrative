@@ -1,1 +1,171 @@
-<p>dialog works!</p>
+<div mat-dialog-content>
+  <form id="CourseForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="flex flex-col w-full">
+      <mat-form-field appearance="outline">
+        <mat-label>Título del Curso</mat-label>
+        <input matInput formControlName="title" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="box-border grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>URL de Vista Previa</mat-label>
+        <input matInput formControlName="videoPreviewUrl" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Profesor</mat-label>
+        <input matInput formControlName="teacherName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Duración (Horas)</mat-label>
+        <input matInput type="number" formControlName="durationHours" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Total de Lecciones</mat-label>
+        <input matInput type="number" formControlName="totalLessons" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nivel</mat-label>
+        <mat-select formControlName="level">
+          <mat-option value="basic">Básico</mat-option>
+          <mat-option value="intermediate">Intermedio</mat-option>
+          <mat-option value="advanced">Avanzado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let cat of categories" [value]="cat.id">
+            {{ cat.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Carrera</mat-label>
+        <mat-select formControlName="career">
+          <mat-option *ngFor="let career of careers" [value]="career.id">
+            {{ career.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Roadmap</mat-label>
+        <mat-select formControlName="roadmap">
+          <mat-option *ngFor="let road of roadmaps" [value]="road.id">
+            {{ road.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div
+      class="tag-selection bg-gray-100 my-4 rounded-md p-4 flex flex-col w-full"
+    >
+      <mat-form-field>
+        <mat-label>Seleccionar Tags</mat-label>
+        <mat-select (selectionChange)="onTagSelect($event.value)">
+          <mat-option *ngFor="let tag of tags" [value]="tag">
+            {{ tag.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="selected-tags">
+        <mat-chip-listbox>
+          <mat-chip-option
+            *ngFor="let tag of selectedTags"
+            (removed)="removeTag(tag)"
+            removable
+          >
+            {{ tag.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </div>
+
+    <div formArrayName="lessons">
+      <div *ngFor="let lesson of lessonsControls; let i = index">
+        <div
+          id="card"
+          class="lesson-card bg-gray-100 rounded-md flex flex-col w-full mb-4"
+        >
+          <div id="content" class="p-4">
+            <div [formGroupName]="i" class="box-border grid grid-cols-2 gap-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Título de Lección</mat-label>
+                <input matInput formControlName="title" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Duración (Minutos)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="durationMinutes"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>URL del Video</mat-label>
+                <input matInput formControlName="videoURL" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción de Lección</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div id="actions" class="w-full">
+            <button
+              class="rounded-b-md flex justify-center items-center hover:bg-red-500 bg-red-400 w-full text-white p-2"
+              color="warn"
+              (click)="removeLesson(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button
+        class="bg-blue-500 hover:bg-blue-600 flex items-center justify-center rounded-md text-white px-3 py-2 w-full"
+        (click)="addLesson()"
+      >
+        <mat-icon>add</mat-icon> Agregar Lección
+      </button>
+    </div>
+
+    <mat-dialog-actions class="gap-4 w-full">
+      <button
+        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md"
+        (click)="onCancel()"
+      >
+        Cancelar
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

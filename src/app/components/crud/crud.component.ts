@@ -36,12 +36,16 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
   @Input() columnHeaders!: { [key: string]: string };
   @Input() formFields!: DialogField[];
   @Input() crudName!: string;
+  @Input() dialogComponent?: any;
 
+  //dialog: any;
   dataSource!: MatTableDataSource<T>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   allColumns: string[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+    this.dialogComponent = this.dialogComponent || DialogComponent;
+  }
 
   ngOnInit() {
     this.allColumns = [...this.displayedColumns, 'actions'];
@@ -56,7 +60,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
   }
 
   deleteItem(item: T) {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(this.dialogComponent, {
       data: {
         type: 'confirm',
         title: 'Confirmar Eliminación',
@@ -65,7 +69,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
       } as DialogConfig,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.service.delete(item.id).subscribe(() => {
           this.loadData();
@@ -75,7 +79,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
   }
 
   createItem() {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(this.dialogComponent, {
       width: '1000px',
       height: '400px',
       data: {
@@ -85,7 +89,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
       } as DialogConfig,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.service.create(result).subscribe(() => {
           this.loadData();
@@ -95,7 +99,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
   }
 
   editItem(item: T) {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(this.dialogComponent, {
       width: '1000px',
       height: '400px',
       data: {
@@ -106,7 +110,7 @@ export class CrudComponent<T extends { id: number }> implements OnInit {
       } as DialogConfig,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.service.update(item.id, result).subscribe(() => {
           this.loadData();
