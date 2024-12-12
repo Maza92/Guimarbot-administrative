@@ -10,3 +10,15 @@ export interface Career {
   title: string;
   description: string;
 }
+
+export interface CategoryResponse {
+  title: string;
+  description: string;
+  isPublic: boolean;
+  level: string;
+  category: { id: number } | null;
+}
+
+export interface CategoryUpdate extends CategoryResponse {
+  id: number;
+}

@@ -3,6 +3,7 @@ import { CrudComponent } from '../crud/crud.component';
 import { DialogComponent, DialogField } from '../crud/dialog/dialog.component';
 import { Validators } from '@angular/forms';
 import { RoadmapService } from '../../core/service/roadmap.service';
+import { CategoryDialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-roadmap',
@@ -12,6 +13,7 @@ import { RoadmapService } from '../../core/service/roadmap.service';
   styleUrl: './roadmap.component.css',
 })
 export class RoadmapComponent {
+  dialogComponent = CategoryDialogComponent;
   constructor(public roadmapService: RoadmapService) {}
 
   displayedColumns = [

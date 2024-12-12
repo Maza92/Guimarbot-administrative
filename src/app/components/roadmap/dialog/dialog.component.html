@@ -1,0 +1,63 @@
+<div mat-dialog-content>
+  <form
+    id="CategoryForm"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col w-full space-y-4"
+  >
+    <div class="flex flex-col w-full">
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="title" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="box-border grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Nivel</mat-label>
+        <mat-select formControlName="level">
+          <mat-option value="basic">Básico</mat-option>
+          <mat-option value="intermediate">Intermedio</mat-option>
+          <mat-option value="advanced">Avanzado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let cat of categories" [value]="cat.id">
+            {{ cat.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <mat-checkbox formControlName="isPublic" color="primary">
+        Es Público
+      </mat-checkbox>
+    </div>
+
+    <mat-dialog-actions class="flex justify-end space-x-4 w-full mt-4">
+      <button
+        mat-dialog-close
+        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors duration-300"
+        type="button"
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Guardar
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
