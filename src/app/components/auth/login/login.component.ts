@@ -32,8 +32,12 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-      this.authService.login(credentials).subscribe((success) => {
-        if (success) {
+      this.authService.login(credentials).subscribe((response) => {
+        if (response) {
+          this.authService.loadUserData(response.userId).subscribe((user) => {
+            console.log(user.names);
+            localStorage.setItem('userName', user.names);
+          });
           this.router.navigate(['/plan']);
         } else {
           console.log('Credenciales invalidas');

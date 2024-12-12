@@ -1,7 +1,22 @@
-<app-crud
-  [columnHeaders]="columnHeaders"
-  [crudName]="crudName"
-  [displayedColumns]="displayedColumns"
-  [service]="roadmapService"
-  [formFields]="formFields"
-></app-crud>
+<div class="p-6 bg-gray-100 min-h-screen">
+  <div class="max-w-8xl mx-auto">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <div class="px-6 py-4 bg-blue-500 text-white">
+        <h2 class="text-2xl font-bold">{{ crudName }}</h2>
+        <p class="text-sm mt-1">
+          Este módulo te permite realizar operaciones CRUD para gestionar rutas
+          de aprendizaje.
+        </p>
+      </div>
+      <div class="p-6">
+        <app-crud
+          [columnHeaders]="columnHeaders"
+          [crudName]="crudName"
+          [displayedColumns]="displayedColumns"
+          [service]="roadmapService"
+          [formFields]="formFields"
+        ></app-crud>
+      </div>
+    </div>
+  </div>
+</div>

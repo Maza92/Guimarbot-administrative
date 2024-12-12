@@ -12,15 +12,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: LoginCredentials): Observable<boolean> {
+  login(credentials: LoginCredentials): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       map((response: any) => {
         localStorage.setItem('authToken', response.accessToken);
-        return true;
+        console.log(response);
+        return response;
       }),
       catchError(() => of(false))
     );
   }
+
+  loadUserData(userId: number): Observable<any> {
+    return this.http.get(`${API_URL_BASE}/user/${userId}`);
+  }
+
 
   register(user: Register): Observable<boolean> {
     return this.http.post(`${this.apiUrl}/register`, user).pipe(

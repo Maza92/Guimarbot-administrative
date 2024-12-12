@@ -10,4 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 export class NavbarComponent {
   @Input() isSidebarVisible = true;
   @Output() toggleSidebar = new EventEmitter<void>();
+
+  userName = localStorage.getItem('userName');
 }
