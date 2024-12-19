@@ -1,47 +1,70 @@
 <div class="w-full p-4 flex justify-end">
   <button
-    class="bg-blue-500 flex justify-center items-center px-2 py-1 rounded-md text-white cursor-pointer hover:bg-blue-600"
+    class="bg-blue-100 text-blue-700 flex justify-center items-center px-4 py-2 rounded-lg border border-blue-200 cursor-pointer hover:bg-blue-200 transition-colors"
     (click)="createItem()"
   >
+    <mat-icon class="mr-2">add</mat-icon>
     Agregar {{ crudName }}
   </button>
 </div>
 <table
   mat-table
-  header-headline-font
   [dataSource]="dataSource"
-  class="font-sans"
+  class="w-full bg-white"
 >
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-    <th mat-header-cell *matHeaderCellDef>{{ getHeaderName(column) }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    <th 
+      mat-header-cell 
+      *matHeaderCellDef 
+      class="bg-blue-50 text-blue-800 font-semibold border-b border-blue-100"
+    >
+      {{ getHeaderName(column) }}
+    </th>
+    <td 
+      mat-cell 
+      *matCellDef="let element" 
+      class="text-blue-900 border-b border-blue-50"
+    >
+      {{ element[column] }}
+    </td>
   </ng-container>
-
+  
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Acciones</th>
-    <td mat-cell *matCellDef="let element">
-      <div class="flex text-white">
-        <div
-          class="bg-red-400 flex justify-center items-center rounded-l-md p-1 cursor-pointer hover:bg-red-500"
+    <th 
+      mat-header-cell 
+      *matHeaderCellDef 
+      class="bg-blue-50 text-blue-800 font-semibold border-b border-blue-100"
+    >
+      Acciones
+    </th>
+    <td 
+      mat-cell 
+      *matCellDef="let element" 
+      class="border-b border-blue-50"
+    >
+      <div class="flex">
+        <button
+          class="bg-red-100 text-red-700 flex justify-center items-center rounded-l-lg p-2 cursor-pointer hover:bg-red-200 transition-colors"
           (click)="deleteItem(element)"
         >
           <mat-icon>delete</mat-icon>
-        </div>
-        <div
-          class="bg-blue-500 flex justify-center items-center rounded-r-md p-1 cursor-pointer hover:bg-blue-600"
+        </button>
+        <button
+          class="bg-blue-100 text-blue-700 flex justify-center items-center rounded-r-lg p-2 cursor-pointer hover:bg-blue-200 transition-colors"
           (click)="editItem(element)"
         >
           <mat-icon>edit</mat-icon>
-        </div>
+        </button>
       </div>
     </td>
   </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="allColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: allColumns"></tr>
+  
+  <tr mat-header-row *matHeaderRowDef="allColumns" class="bg-blue-50"></tr>
+  <tr mat-row *matRowDef="let row; columns: allColumns" class="hover:bg-blue-50/50 transition-colors"></tr>
 </table>
 <mat-paginator
   [pageSizeOptions]="[5, 10, 25, 100]"
   hidePageSize="true"
-  aria-label="Select page of users"
+  aria-label="Seleccionar página"
+  class="bg-blue-50 text-blue-800"
 ></mat-paginator>

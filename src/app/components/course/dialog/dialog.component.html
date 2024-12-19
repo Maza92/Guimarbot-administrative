@@ -1,86 +1,163 @@
-<div mat-dialog-content>
-  <form id="CourseForm" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="flex flex-col w-full">
+<div mat-dialog-content class="p-6">
+  <form 
+    id="CourseForm" 
+    [formGroup]="form" 
+    (ngSubmit)="onSubmit()"
+    class="space-y-6"
+  >
+    <div class="flex flex-col w-full space-y-4">
       <mat-form-field appearance="outline">
-        <mat-label>Título del Curso</mat-label>
-        <input matInput formControlName="title" required />
+        <mat-label class="text-blue-800">Título del Curso</mat-label>
+        <input 
+          matInput 
+          formControlName="title" 
+          required 
+          class="text-blue-900 placeholder-blue-500"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="description" rows="3"></textarea>
+        <mat-label class="text-blue-800">Descripción</mat-label>
+        <textarea 
+          matInput 
+          formControlName="description" 
+          rows="3"
+          class="text-blue-900 placeholder-blue-500"
+        ></textarea>
       </mat-form-field>
     </div>
-    <div class="box-border grid grid-cols-2 gap-4">
+
+    <div class="grid grid-cols-2 gap-4">
       <mat-form-field appearance="outline">
-        <mat-label>Precio</mat-label>
-        <input matInput type="number" formControlName="price" />
+        <mat-label class="text-blue-800">Precio</mat-label>
+        <input 
+          matInput 
+          type="number" 
+          formControlName="price"
+          class="text-blue-900"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>URL de Vista Previa</mat-label>
-        <input matInput formControlName="videoPreviewUrl" />
+        <mat-label class="text-blue-800">URL de Vista Previa</mat-label>
+        <input 
+          matInput 
+          formControlName="videoPreviewUrl"
+          class="text-blue-900 placeholder-blue-500"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Nombre del Profesor</mat-label>
-        <input matInput formControlName="teacherName" />
+        <mat-label class="text-blue-800">Nombre del Profesor</mat-label>
+        <input 
+          matInput 
+          formControlName="teacherName"
+          class="text-blue-900"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Duración (Horas)</mat-label>
-        <input matInput type="number" formControlName="durationHours" />
+        <mat-label class="text-blue-800">Duración (Horas)</mat-label>
+        <input 
+          matInput 
+          type="number" 
+          formControlName="durationHours"
+          class="text-blue-900"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Total de Lecciones</mat-label>
-        <input matInput type="number" formControlName="totalLessons" />
+        <mat-label class="text-blue-800">Total de Lecciones</mat-label>
+        <input 
+          matInput 
+          type="number" 
+          formControlName="totalLessons"
+          class="text-blue-900"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Nivel</mat-label>
-        <mat-select formControlName="level">
-          <mat-option value="basic">Básico</mat-option>
-          <mat-option value="intermediate">Intermedio</mat-option>
-          <mat-option value="advanced">Avanzado</mat-option>
+        <mat-label class="text-blue-800">Nivel</mat-label>
+        <mat-select 
+          formControlName="level" 
+          class="text-blue-900"
+        >
+          <mat-option 
+            value="basic" 
+            class="hover:bg-blue-50"
+          >Básico</mat-option>
+          <mat-option 
+            value="intermediate" 
+            class="hover:bg-blue-50"
+          >Intermedio</mat-option>
+          <mat-option 
+            value="advanced" 
+            class="hover:bg-blue-50"
+          >Avanzado</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Categoría</mat-label>
-        <mat-select formControlName="category">
-          <mat-option *ngFor="let cat of categories" [value]="cat.id">
+        <mat-label class="text-blue-800">Categoría</mat-label>
+        <mat-select 
+          formControlName="category" 
+          class="text-blue-900"
+        >
+          <mat-option 
+            *ngFor="let cat of categories" 
+            [value]="cat.id"
+            class="hover:bg-blue-50"
+          >
             {{ cat.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Carrera</mat-label>
-        <mat-select formControlName="career">
-          <mat-option *ngFor="let career of careers" [value]="career.id">
+        <mat-label class="text-blue-800">Carrera</mat-label>
+        <mat-select 
+          formControlName="career" 
+          class="text-blue-900"
+        >
+          <mat-option 
+            *ngFor="let career of careers" 
+            [value]="career.id"
+            class="hover:bg-blue-50"
+          >
             {{ career.title }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Roadmap</mat-label>
-        <mat-select formControlName="roadmap">
-          <mat-option *ngFor="let road of roadmaps" [value]="road.id">
+        <mat-label class="text-blue-800">Roadmap</mat-label>
+        <mat-select 
+          formControlName="roadmap" 
+          class="text-blue-900"
+        >
+          <mat-option 
+            *ngFor="let road of roadmaps" 
+            [value]="road.id"
+            class="hover:bg-blue-50"
+          >
             {{ road.title }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <div
-      class="tag-selection bg-gray-100 my-4 rounded-md p-4 flex flex-col w-full"
-    >
-      <mat-form-field>
-        <mat-label>Seleccionar Tags</mat-label>
-        <mat-select (selectionChange)="onTagSelect($event.value)">
-          <mat-option *ngFor="let tag of tags" [value]="tag">
+    <div class="bg-blue-50 my-4 rounded-lg p-4 space-y-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label class="text-blue-800">Seleccionar Tags</mat-label>
+        <mat-select 
+          (selectionChange)="onTagSelect($event.value)"
+          class="text-blue-900"
+        >
+          <mat-option 
+            *ngFor="let tag of tags" 
+            [value]="tag"
+            class="hover:bg-blue-50"
+          >
             {{ tag.name }}
           </mat-option>
         </mat-select>
@@ -92,6 +169,7 @@
             *ngFor="let tag of selectedTags"
             (removed)="removeTag(tag)"
             removable
+            color="primary"
           >
             {{ tag.name }}
             <mat-icon matChipRemove>cancel</mat-icon>
@@ -100,67 +178,80 @@
       </div>
     </div>
 
-    <div formArrayName="lessons">
+    <div formArrayName="lessons" class="space-y-4">
       <div *ngFor="let lesson of lessonsControls; let i = index">
-        <div
-          id="card"
-          class="lesson-card bg-gray-100 rounded-md flex flex-col w-full mb-4"
+        <div 
+          class="bg-blue-50 rounded-lg flex flex-col w-full mb-4 border border-blue-100"
         >
-          <div id="content" class="p-4">
-            <div [formGroupName]="i" class="box-border grid grid-cols-2 gap-4">
+          <div class="p-4">
+            <div [formGroupName]="i" class="grid grid-cols-2 gap-4">
               <mat-form-field appearance="outline">
-                <mat-label>Título de Lección</mat-label>
-                <input matInput formControlName="title" />
-              </mat-form-field>
-
-              <mat-form-field appearance="outline">
-                <mat-label>Duración (Minutos)</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  formControlName="durationMinutes"
+                <mat-label class="text-blue-800">Título de Lección</mat-label>
+                <input 
+                  matInput 
+                  formControlName="title"
+                  class="text-blue-900"
                 />
               </mat-form-field>
 
               <mat-form-field appearance="outline">
-                <mat-label>URL del Video</mat-label>
-                <input matInput formControlName="videoURL" />
+                <mat-label class="text-blue-800">Duración (Minutos)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="durationMinutes"
+                  class="text-blue-900"
+                />
               </mat-form-field>
 
               <mat-form-field appearance="outline">
-                <mat-label>Descripción de Lección</mat-label>
-                <textarea matInput formControlName="description"></textarea>
+                <mat-label class="text-blue-800">URL del Video</mat-label>
+                <input 
+                  matInput 
+                  formControlName="videoURL"
+                  class="text-blue-900 placeholder-blue-500"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label class="text-blue-800">Descripción de Lección</mat-label>
+                <textarea 
+                  matInput 
+                  formControlName="description"
+                  class="text-blue-900 placeholder-blue-500"
+                ></textarea>
               </mat-form-field>
             </div>
           </div>
-          <div id="actions" class="w-full">
+          <div class="w-full">
             <button
-              class="rounded-b-md flex justify-center items-center hover:bg-red-500 bg-red-400 w-full text-white p-2"
+              class="rounded-b-lg flex justify-center items-center hover:bg-red-200 bg-red-100 w-full text-red-700 p-2"
               color="warn"
               (click)="removeLesson(i)"
             >
-              <mat-icon>delete</mat-icon>
+              <mat-icon class="mr-2">delete</mat-icon> Eliminar Lección
             </button>
           </div>
         </div>
       </div>
       <button
-        class="bg-blue-500 hover:bg-blue-600 flex items-center justify-center rounded-md text-white px-3 py-2 w-full"
+        class="bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center justify-center rounded-lg px-3 py-2 w-full border border-blue-200"
         (click)="addLesson()"
       >
-        <mat-icon>add</mat-icon> Agregar Lección
+        <mat-icon class="mr-2">add</mat-icon> Agregar Lección
       </button>
     </div>
 
-    <mat-dialog-actions class="gap-4 w-full">
+    <mat-dialog-actions class="flex justify-end space-x-4 w-full mt-4">
       <button
-        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md"
+        class="bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg transition-colors border border-red-200"
         (click)="onCancel()"
       >
         Cancelar
       </button>
       <button
-        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md"
+        class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-5 py-2 rounded-lg transition-colors border border-blue-200 
+               disabled:opacity-50 disabled:cursor-not-allowed"
         type="submit"
         [disabled]="form.invalid"
       >

@@ -1,30 +1,31 @@
 <div
-  class="fixed top-0 left-0 h-screen w-[15rem] bg-secondary text-white shadow-xl shadow-blue-gray-900/5 transform transition-transform duration-300 ease-in-out overflow-y-auto"
+  class="fixed top-0 left-0 h-screen w-64 bg-blue-50 text-blue-800 shadow-lg shadow-blue-200/50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
   [ngClass]="{
     '-translate-x-full': !isVisible,
     'translate-x-0': isVisible
   }"
 >
-  <div class="p-4 mb-2">
+  <div class="p-6 border-b border-blue-100 mb-4">
     <h5
-      class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+      class="text-2xl font-bold tracking-wide text-blue-900 uppercase"
     >
       Guimabot
     </h5>
   </div>
-  <nav
-    class="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700"
-  >
+  <nav class="px-4 space-y-2">
     <div
       *ngFor="let item of menuItems"
       (click)="onMenuClick(item)"
       role="button"
-      class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start [&>div]:hover:text-gray-300 hover:text-gray-300"
+      class="flex items-center w-full px-4 py-3 rounded-lg transition-colors 
+             hover:bg-blue-100 active:bg-blue-200 
+             text-blue-700 hover:text-blue-900 
+             cursor-pointer group"
     >
-      <div class="grid mr-4 place-items-center font-sans font-light">
+      <div class="mr-4 text-blue-600 group-hover:text-blue-800">
         <mat-icon>{{ item.icon }}</mat-icon>
       </div>
-      {{ item.label }}
+      <span class="font-medium">{{ item.label }}</span>
     </div>
   </nav>
 </div>

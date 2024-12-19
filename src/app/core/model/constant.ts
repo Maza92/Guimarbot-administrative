@@ -1,1 +1,1 @@
-export const API_URL_BASE = 'https://guimarbot-backend.onrender.com/api';
+export const API_URL_BASE = 'http://localhost:3000/api';
